@@ -10,7 +10,9 @@ interface IStudent {
   phone: string;
   studentId: string;
   classroom: string;
+  startTime: number;
 }
+const timeStart = "startTime";
 
 @Component({
   selector: 'app-question',
@@ -29,7 +31,7 @@ export class QuestionComponent implements OnInit {
     private toaster: ToasterService,
     private confirmationService: ConfirmationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.studentValue = JSON.parse(localStorage.getItem('student'));
@@ -38,11 +40,20 @@ export class QuestionComponent implements OnInit {
     }
 
     this.questionService.getQuestions().subscribe(data => {
+      var startTimeMis = this.getTimeStart();
       this.totalTime = data.items.length * 20;
-      this.countDown = this.totalTime;
-
+      var use = Math.round((Date.now() - startTimeMis) / 1000);
+      this.countDown = this.totalTime - use;
+      this.countdown();
       return (this.questions = data.items.map(c => new QuestionModel(c.id, c.text, c.answers)));
     });
+  }
+
+  countdown() {
+    let intervalId = setInterval(() => {
+      this.countDown = this.countDown - 1; 
+      if (this.countDown === 0) clearInterval(intervalId)
+    }, 1000)
   }
 
   onSave() {
@@ -54,11 +65,23 @@ export class QuestionComponent implements OnInit {
     request = {
       ...this.studentValue,
       phone: String(this.studentValue.phone),
-      time: 123,
+      time: this.totalTime - this.countDown,
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer.id })),
     };
 
     // console.log(finished, this.questions)
-    this.questionService.submitAnswers(request).subscribe(payload => {});
+    this.questionService.submitAnswers(request).subscribe(payload => {
+      localStorage.removeItem(timeStart);
+      this.toaster.success(payload.mark + "");
+    });
+  }
+
+  getTimeStart() { 
+    if (this.studentValue.startTime) {
+      return this.studentValue.startTime;
+    }
+    this.studentValue.startTime = Date.now();
+    localStorage.setItem('student', JSON.stringify(this.studentValue));
+    return this.studentValue.startTime;
   }
 }

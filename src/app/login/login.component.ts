@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['test']);
     }
     this.studentForm = this.formBuilder.group({
-      fullName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       studentId: ['', [Validators.required]],
       classroom: ['', [Validators.required]],

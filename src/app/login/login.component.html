@@ -1,9 +1,9 @@
 <form class="example-form" [formGroup]="studentForm">
   <mat-form-field class="example-full-width">
     <mat-label>Họ và tên <sup>*</sup></mat-label>
-    <input formControlName="fullName" class="input" matInput />
+    <input formControlName="name" class="input" matInput />
 
-    <mat-error *ngIf="studentForm.get('fullName').hasError('required')">
+    <mat-error *ngIf="studentForm.get('name').hasError('required')">
       Họ và tên là trường bắt buộc!
     </mat-error>
   </mat-form-field>
