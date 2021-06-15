@@ -9,14 +9,6 @@ import { Injectable } from '@angular/core';
 export class QuestionService {
   apiName = 'Default';
 
-  createQuestions = (request: CreateQuestionRequestDto) =>
-    this.restService.request<any, boolean>({
-      method: 'POST',
-      url: '/api/app/question/questions',
-      body: request,
-    },
-    { apiName: this.apiName });
-
   getAllUserResults = (request: PagedResultRequestDto) =>
     this.restService.request<any, PagedResultDto<UserResultDto>>({
       method: 'GET',

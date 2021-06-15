@@ -1,0 +1,45 @@
+<form class="example-form" [formGroup]="studentForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>Họ và tên <sup>*</sup></mat-label>
+    <input formControlName="fullName" class="input" matInput />
+
+    <mat-error *ngIf="studentForm.get('fullName').hasError('required')">
+      Họ và tên là trường bắt buộc!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Số điện thoại <sup>*</sup></mat-label>
+
+    <input formControlName="phone" type="number" class="input" matInput />
+    <mat-error *ngIf="studentForm.get('phone').hasError('required')">
+      Số điện thoại là trường bắt buộc!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Mã số sinh viên <sup>*</sup></mat-label>
+    <input formControlName="studentId" class="input" matInput />
+
+    <mat-error *ngIf="studentForm.get('studentId').hasError('required')">
+      Mã số sinh viên là trường bắt buộc!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Lớp <sup>*</sup></mat-label>
+    <input formControlName="classroom" class="input" matInput />
+
+    <mat-error *ngIf="studentForm.get('classroom').hasError('required')">
+      Lớp là trường bắt buộc!
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    [class.spinner]="loading"
+    [disabled]="loading"
+    (click)="onSubmit()"
+    class="btn-submit"
+    mat-raised-button
+    color="primary"
+  >
+    Bắt đầu
+  </button>
+</form>
