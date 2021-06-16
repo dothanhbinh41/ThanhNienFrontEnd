@@ -43,15 +43,18 @@ export class QuestionComponent implements OnInit {
       var startTimeMis = this.getTimeStart();
       this.totalTime = data.items.length * 20;
       var use = Math.round((Date.now() - startTimeMis) / 1000);
-      this.countDown = this.totalTime - use;
-      this.countdown();
-      return (this.questions = data.items.map(c => new QuestionModel(c.id, c.text, c.answers)));
+      this.countDown = this.totalTime > use ? this.totalTime - use : 0;
+
+      if (this.countDown) {
+        (this.questions = data.items.map(c => new QuestionModel(c.id, c.text, c.answers, data.items.indexOf(c) + 1))); 
+        this.countdown();
+      }
     });
   }
 
   countdown() {
     let intervalId = setInterval(() => {
-      this.countDown = this.countDown - 1; 
+      this.countDown = this.countDown - 1;
       if (this.countDown === 0) clearInterval(intervalId)
     }, 1000)
   }
@@ -76,7 +79,7 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  getTimeStart() { 
+  getTimeStart() {
     if (this.studentValue.startTime) {
       return this.studentValue.startTime;
     }

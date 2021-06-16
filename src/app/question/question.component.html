@@ -2,7 +2,7 @@
 <label>con lai {{countDown}} giay</label>
 
 <div *ngFor="let question of questions">
-  <label>{{ question.text }}</label>
+  <label>{{ question.index }} - {{ question.text }}</label>
   <div>
     <mat-radio-group
       aria-labelledby="question-radio-group-label"
@@ -14,7 +14,7 @@
         *ngFor="let answer of question.answers"
         [value]="answer"
       >
-        {{ answer.text }}
+      {{ answer.text }}
       </mat-radio-button>
     </mat-radio-group>
   </div>
