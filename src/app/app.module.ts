@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatInputModule,
   ],
-  declarations: [AppComponent, QuestionComponent, LoginComponent],
+  declarations: [AppComponent, QuestionComponent, LoginComponent, ResultsComponent],
   providers: [APP_ROUTE_PROVIDER],
   bootstrap: [AppComponent],
 })

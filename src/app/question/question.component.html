@@ -1,23 +1,19 @@
-
-<label>con lai {{countDown}} giay</label>
-
-<div *ngFor="let question of questions">
-  <label>{{ question.index }} - {{ question.text }}</label>
-  <div>
-    <mat-radio-group
-      aria-labelledby="question-radio-group-label"
-      class="question-radio-group"
-      [(ngModel)]="question.answer"
-    >
-      <mat-radio-button
-        class="question-radio-button"
-        *ngFor="let answer of question.answers"
-        [value]="answer"
-      >
-      {{ answer.text }}
-      </mat-radio-button>
-    </mat-radio-group>
+<div><label>{{studentValue.name}}</label></div>
+<button mat-raised-button color="accent" (click)="onStart()"
+  [ngStyle]="{'visibility': started ? 'hidden' : 'visible'}">Bắt đầu</button>
+<div [ngStyle]="{'visibility': started ? 'visible' : 'hidden'}">
+  <label>con lai {{timeleft}} giay</label>
+  <div *ngFor="let question of questions">
+    <label>{{ question.index }} - {{ question.text }}</label>
+    <div>
+      <mat-radio-group aria-labelledby="question-radio-group-label" class="question-radio-group"
+        [(ngModel)]="question.answer">
+        <mat-radio-button class="question-radio-button" *ngFor="let answer of question.answers" [value]="answer">
+          {{ answer.text }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
   </div>
-</div>
 
-<button mat-raised-button color="accent" (click)="onSave()">Nộp Bài</button>
+  <button mat-raised-button color="accent" (click)="onSave()">Nộp Bài</button>
+</div>
