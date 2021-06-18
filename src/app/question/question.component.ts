@@ -40,7 +40,7 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     this.studentValue = JSON.parse(localStorage.getItem(studentKey));
     this.data = JSON.parse(localStorage.getItem(questionKey));
-    this.totalTime = (this.data?.length || 0) * 200;
+    this.totalTime = (this.data?.length || 0) * TimeToProcess;
     this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey));
 
     if (!this.data) {
@@ -81,10 +81,10 @@ export class QuestionComponent implements OnInit {
     var result = await this.questionService.submitAnswers(request).toPromise();
     if (result) {
       this.removeTemp();
-      this.toaster.success(result.mark + '');
+      this.toaster.success('Nộp bài thành công!!!', 'Thành công');
       this.router.navigateByUrl('/result');
     } else {
-      this.toaster.error('Không nộp được bài', 'Không nộp được bài');
+      this.toaster.error('Không nộp được bài', 'Lỗi');
     }
   }
 
@@ -111,8 +111,5 @@ export class QuestionComponent implements OnInit {
 
   changeAnswer() {
     localStorage.setItem(questionKey, JSON.stringify(this.questions));
-    console.log(this.questions[0]);
-    // this.timeLeft = 200;
-    // localStorage.setItem(timeLeftKey, this.timeLeft.toString());
   }
 }
