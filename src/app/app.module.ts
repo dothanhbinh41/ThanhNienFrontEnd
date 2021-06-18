@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './login/login.component';
 import { ResultsComponent } from './results/results.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { ResultsComponent } from './results/results.component';
     MatInputModule,
     MatCardModule,
   ],
-  declarations: [AppComponent, QuestionComponent, LoginComponent, ResultsComponent],
+  declarations: [AppComponent, QuestionComponent, LoginComponent, ResultsComponent, LeaderboardComponent],
   providers: [APP_ROUTE_PROVIDER],
   bootstrap: [AppComponent],
 })

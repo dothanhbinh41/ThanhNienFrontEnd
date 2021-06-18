@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LoginComponent } from './login/login.component';
 import { QuestionComponent } from './question/question.component';
 import { ResultsComponent } from './results/results.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: 'result',
     component: ResultsComponent,
   },
+  {
+    path: 'top',
+    component: LeaderboardComponent,
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -24,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
