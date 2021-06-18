@@ -15,8 +15,8 @@ export class LeaderboardComponent implements OnInit {
   constructor(public list: ListService, private questionService: QuestionService) { }
 
   ngOnInit() {
-    this.list.maxResultCount = 40;
-    const departmentStreamCreator = () => this.questionService.getAllUserResults({ maxResultCount: this.list.maxResultCount, skipCount: this.list.page * 40 });
+    this.list.maxResultCount = 10;
+    const departmentStreamCreator = () => this.questionService.getAllUserResults({ maxResultCount: this.list.maxResultCount, skipCount: this.list.page * this.list.maxResultCount });
 
     this.list.hookToQuery(departmentStreamCreator).subscribe((response: PagedResultDto<UserResultDto>) => {
       this.result = response;

@@ -1,3 +1,10 @@
-.card-body{
-    width: 100%;
+::ng-deep app-leaderboard {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .full-card {
+    width: 80%;
+  }
 }
