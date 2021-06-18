@@ -36,18 +36,13 @@ export class QuestionComponent implements OnInit {
     private questionService: QuestionService,
     private toaster: ToasterService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.studentValue = JSON.parse(localStorage.getItem(studentKey));
     this.data = JSON.parse(localStorage.getItem(questionKey));
-    this.totalTime = (this.data?.length || 0) * TimeToProcess;
+    this.totalTime = 30 * TimeToProcess;
     this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey));
-
-    // if (!this.data) {
-    //   this.router.navigate(['login']);
-    //   return;
-    // }
 
     if (this.timeLeft && this.timeLeft < this.totalTime) {
       this.onStart();
@@ -75,8 +70,7 @@ export class QuestionComponent implements OnInit {
     let request: SubmitAnswersRequestDto;
     request = {
       ...this.studentValue,
-      phone: String(this.studentValue.phone),
-      time: this.totalTime - this.timeLeft,
+      phone: String(this.studentValue.phone), 
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };
 
@@ -91,7 +85,12 @@ export class QuestionComponent implements OnInit {
     this.loading = false;
   }
 
-  onStart() {
+  async onStart() {
+    if (!this.data) { 
+      this.loading = true;
+      await this.getQuestion(this.studentValue.phone); 
+      this.loading = false;
+    }
     this.started = true;
     this.setTimeleft();
     this.questions = this.data.map(
@@ -114,5 +113,10 @@ export class QuestionComponent implements OnInit {
 
   changeAnswer() {
     localStorage.setItem(questionKey, JSON.stringify(this.questions));
+  }
+
+  async getQuestion(phone) {
+    var questions = await this.questionService.getQuestions(phone).toPromise();
+    localStorage.setItem(questionKey, JSON.stringify(questions.items));
   }
 }

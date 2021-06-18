@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         this.router.navigate(['result']);
         this.questionService.resultStudent = result;
-      } else {
-        await this.getQuestion();
+      } else { 
         this.loading = false;
         this.router.navigate(['test']);
       }
@@ -57,8 +56,7 @@ export class LoginComponent implements OnInit {
     if (result) {
       this.loading = false;
       this.router.navigate(['result']);
-    } else {
-      await this.getQuestion();
+    } else { 
       this.loading = false;
       this.router.navigate(['test']);
     }
@@ -66,10 +64,5 @@ export class LoginComponent implements OnInit {
 
   async checkResult(phone) {
     return await this.questionService.getResult(phone).toPromise();
-  }
-
-  async getQuestion() {
-    var questions = await this.questionService.getQuestions().toPromise();
-    localStorage.setItem(questionKey, JSON.stringify(questions.items));
-  }
+  } 
 }
