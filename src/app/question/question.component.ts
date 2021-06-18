@@ -48,7 +48,7 @@ export class QuestionComponent implements OnInit {
       return;
     }
 
-    if (this.timeLeft && this.timeLeft > this.totalTime) {
+    if (this.timeLeft && this.timeLeft < this.totalTime) {
       this.onStart();
     }
   }
