@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
         }
       }
 
-      .spinner:before {
+      ::ng-deep .spinner:before {
         content: '';
         box-sizing: border-box;
         position: absolute;
