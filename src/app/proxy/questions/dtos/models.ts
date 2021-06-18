@@ -41,4 +41,5 @@ export interface UserResultDto {
   phone?: string;
   time: number;
   mark: number;
+  rank?:number;
 }

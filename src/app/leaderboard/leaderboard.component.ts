@@ -17,10 +17,12 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit() {
     this.list.maxResultCount = 10;
     const departmentStreamCreator = () => this.questionService.getAllUserResults({ maxResultCount: this.list.maxResultCount, skipCount: this.list.page * this.list.maxResultCount });
-
     this.list.hookToQuery(departmentStreamCreator).subscribe((response: PagedResultDto<UserResultDto>) => {
-      this.result = response;
+      this.result.totalCount = response.totalCount;
+      this.result.items = response.items.map((item, index) => {
+        item.rank = index + 1 + this.list.page * this.list.maxResultCount;
+        return item;
+      });
     });
   }
-
 }

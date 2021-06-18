@@ -1,5 +1,6 @@
 <div class="full-card">
     <ngx-datatable data-testid="department-table" [rows]="result.items" [count]="result.totalCount" [list]="list" default>
+        <ngx-datatable-column [name]="'::Thứ hạng' | abpLocalization" prop="rank"></ngx-datatable-column> 
         <ngx-datatable-column [name]="'::Họ Tên' | abpLocalization" prop="name"></ngx-datatable-column> 
         <ngx-datatable-column [name]="'::Số ĐT' | abpLocalization" prop="phone"></ngx-datatable-column>
         <ngx-datatable-column [name]="'::Mã HV' | abpLocalization" prop="studentId"></ngx-datatable-column>
