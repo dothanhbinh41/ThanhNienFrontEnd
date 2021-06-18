@@ -30,6 +30,7 @@ export class QuestionComponent implements OnInit {
   totalTime = 0;
   timeLeft: number;
   started: boolean;
+  loading = false;
 
   constructor(
     private questionService: QuestionService,
@@ -70,6 +71,7 @@ export class QuestionComponent implements OnInit {
       this.toaster.error('Bạn cần trả lời ít nhất 1 câu hỏi', 'Lỗi');
       return;
     }
+    this.loading = true;
     let request: SubmitAnswersRequestDto;
     request = {
       ...this.studentValue,
@@ -78,7 +80,7 @@ export class QuestionComponent implements OnInit {
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };
 
-    var result = await this.questionService.submitAnswers(request).toPromise();
+    const result = await this.questionService.submitAnswers(request).toPromise();
     if (result) {
       this.removeTemp();
       this.toaster.success('Nộp bài thành công!!!', 'Thành công');
@@ -86,6 +88,7 @@ export class QuestionComponent implements OnInit {
     } else {
       this.toaster.error('Không nộp được bài', 'Lỗi');
     }
+    this.loading = false;
   }
 
   onStart() {

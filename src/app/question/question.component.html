@@ -31,7 +31,7 @@
     <div class="time-left">
       Thời gian: <b>{{ timeLeft }}</b> giây
     </div>
-    
+
     <div *ngFor="let question of questions">
       <label>{{ question.index }} - {{ question.text }}</label>
       <div>
@@ -52,6 +52,15 @@
       </div>
     </div>
 
-    <button class="submit-btn" mat-raised-button color="accent" (click)="onSave()">Nộp Bài</button>
+    <button
+      [class.spinner]="loading"
+      [disabled]="loading"
+      class="submit-btn"
+      mat-raised-button
+      color="accent"
+      (click)="onSave()"
+    >
+      Nộp Bài
+    </button>
   </div>
 </div>
