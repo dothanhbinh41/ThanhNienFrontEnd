@@ -3,13 +3,13 @@ $primary-color: #662d91;
 mat-label,
 .mat-input-element {
   font-size: 18px;
-  color: black !important;
+  color: white !important;
 }
 
 .container {
   width: 1280px;
   max-width: 100%;
-  margin: 0 auto;
+  color: white;
   .question-radio-group {
     display: flex;
     flex-direction: column;
@@ -35,6 +35,8 @@ mat-label,
       .logo-text {
         font-size: 36px;
         font-weight: 900;
+        line-height: 1.3;
+        letter-spacing: 1px;
         margin: 0 4px;
       }
     }
@@ -74,4 +76,24 @@ mat-label,
 .submit-btn {
   background-color: $primary-color;
   margin-bottom: 30px;
+}
+
+::ng-deep {
+  .content {
+    background: url('/assets/bg-question.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  app-question {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+
+    .container {
+      margin: auto auto 2rem auto;
+    }
+  }
 }

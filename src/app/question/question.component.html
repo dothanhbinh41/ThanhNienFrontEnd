@@ -2,7 +2,7 @@
   <div class="welcome-content {{ started ? 'start-test' : '' }}">
     <div>
       <h1 class="welcome-text">Chào Mừng</h1>
-      <p class="welcome-sub-text">Đến <span class="logo-text">Edutalk</span></p>
+      <p class="welcome-sub-text">Đến <span class="logo-text">CUỘC THI TRỰC TUYẾN</span></p>
     </div>
   </div>
 
@@ -27,7 +27,10 @@
     </button>
   </div>
 
-  <div [ngStyle]="{ visibility: started ? 'visible' : 'hidden' }">
+  <div
+    [ngStyle]="{ visibility: started ? 'visible' : 'hidden' }"
+    [style.display]="started ? 'block' : 'none'"
+  >
     <div class="time-left">
       Thời gian: <b>{{ timeLeft }}</b> giây
     </div>
