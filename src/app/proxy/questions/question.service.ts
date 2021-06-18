@@ -40,5 +40,7 @@ export class QuestionService {
     },
     { apiName: this.apiName });
 
+  resultStudent = null;
+
   constructor(private restService: RestService) {}
 }

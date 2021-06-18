@@ -14,33 +14,51 @@ export class LoginComponent implements OnInit {
   studentForm: FormGroup;
   studentValue: IStudent;
   loading = false;
-  constructor(private formBuilder: FormBuilder, private router: Router, private questionService: QuestionService,private lazyLoadService: LazyLoadService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private questionService: QuestionService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.studentForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       studentId: ['', [Validators.required]],
       classroom: ['', [Validators.required]],
     });
+    const studentValue = JSON.parse(localStorage.getItem(studentKey));
+
+    if (studentValue) {
+      const result = await this.checkResult(studentValue.phone);
+      if (result) {
+        this.loading = false;
+        this.router.navigate(['result']);
+        this.questionService.resultStudent = result;
+      } else {
+        await this.getQuestion();
+        this.loading = false;
+        this.router.navigate(['test']);
+      }
+    }
   }
 
   async onSubmit() {
     if (this.studentForm.invalid) return;
-    
+    this.loading = true;
+    const formValue = this.studentForm.value;
     localStorage.setItem(
       studentKey,
       JSON.stringify({
-        ...this.studentForm.value,
+        ...formValue,
       })
     );
- 
-    var result = await this.checkResult(this.studentForm.get('phone').value);
+
+    const result = await this.checkResult(formValue.phone);
     if (result) {
       this.loading = false;
-      this.router.navigate(['test']);
-    }
-    else {
+      this.router.navigate(['result']);
+    } else {
       await this.getQuestion();
       this.loading = false;
       this.router.navigate(['test']);

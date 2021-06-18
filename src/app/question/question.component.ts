@@ -2,11 +2,11 @@ import { ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionService } from '@proxy/questions';
-import { QuestionDto, SubmitAnswersRequestDto } from '@proxy/questions/dtos';
+import { AnswerDto, QuestionDto, SubmitAnswersRequestDto } from '@proxy/questions/dtos';
 import { QuestionModel } from './question.model';
 
 export const questionKey = 'question';
-export const timeLeftKey = 'timeleft';
+export const timeLeftKey = 'timeLeft';
 export const studentKey = 'student';
 export const TimeToProcess = 20; //second
 
@@ -28,19 +28,25 @@ export class QuestionComponent implements OnInit {
   data: QuestionDto[];
   studentValue: IStudent;
   totalTime = 0;
-  timeleft: number;
+  timeLeft: number;
   started: boolean;
 
   constructor(
     private questionService: QuestionService,
     private toaster: ToasterService,
-    private confirmationService: ConfirmationService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.studentValue = JSON.parse(localStorage.getItem(studentKey));
     this.data = JSON.parse(localStorage.getItem(questionKey));
+    this.totalTime = (this.data?.length || 0) * 200;
+    this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey));
+
+    if (this.timeLeft && this.timeLeft > this.totalTime) {
+      this.onStart();
+    }
+
     if (!this.data) {
       this.router.navigate(['login']);
     }
@@ -48,54 +54,64 @@ export class QuestionComponent implements OnInit {
 
   countdown() {
     let intervalId = setInterval(() => {
-      this.timeleft -= 1;
-      localStorage.setItem(timeLeftKey, this.timeleft.toString());
-      if (this.timeleft === 0) {
+      this.timeLeft -= 1;
+      localStorage.setItem(timeLeftKey, this.timeLeft.toString());
+      if (this.timeLeft === 0) {
+        this.onSave();
         clearInterval(intervalId);
       }
-    }, 1000)
+    }, 1000);
   }
 
   async onSave() {
     const finished = this.questions.filter(d => d.answer != null);
     if (finished.length === 0) {
-      this.toaster.error("Bạn cần trả lời ít nhất 1 câu hỏi", "Lỗi");
+      this.toaster.error('Bạn cần trả lời ít nhất 1 câu hỏi', 'Lỗi');
       return;
     }
     let request: SubmitAnswersRequestDto;
     request = {
       ...this.studentValue,
       phone: String(this.studentValue.phone),
-      time: this.totalTime - this.timeleft,
-      answers: finished.map(d => ({ questionId: d.id, answerId: d.answer.id })),
+      time: this.totalTime - this.timeLeft,
+      answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };
 
     var result = await this.questionService.submitAnswers(request).toPromise();
     if (result) {
       this.removeTemp();
-      this.toaster.success(result.mark + "");
-    }
-    else {
-      this.toaster.error("Không nộp được bài", "Không nộp được bài");
+      this.toaster.success(result.mark + '');
+      this.router.navigateByUrl('/result');
+    } else {
+      this.toaster.error('Không nộp được bài', 'Không nộp được bài');
     }
   }
 
   onStart() {
     this.started = true;
     this.setTimeleft();
-    this.questions = this.data.map(c => new QuestionModel(c.id, c.text, c.answers, this.data.indexOf(c) + 1));
+    this.questions = this.data.map(
+      c => new QuestionModel(c.id, c.text, c.answers, this.data.indexOf(c) + 1, c.answer)
+    );
     this.countdown();
   }
 
   setTimeleft() {
-    if (!this.timeleft) {
-      this.timeleft = this.data.length * TimeToProcess;
-      localStorage.setItem(timeLeftKey, this.timeleft.toString());
+    if (!this.timeLeft) {
+      this.timeLeft = this.data.length * TimeToProcess;
+      localStorage.setItem(timeLeftKey, this.timeLeft.toString());
     }
   }
 
   removeTemp() {
     localStorage.removeItem(timeLeftKey);
     localStorage.removeItem(questionKey);
+  }
+
+  changeAnswer() {
+    localStorage.setItem(questionKey, JSON.stringify(this.questions));
+    console.log(this.questions[0]);
+    // this.timeLeft = 200;
+    // localStorage.setItem(timeLeftKey, this.timeLeft.toString());
   }
 }

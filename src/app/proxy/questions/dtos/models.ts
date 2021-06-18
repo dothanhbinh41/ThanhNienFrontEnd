@@ -21,6 +21,7 @@ export interface CreateQuestionRequestDto {
 export interface QuestionDto extends EntityDto<number> {
   text?: string;
   answers: AnswerDto[];
+  answer?: number;
 }
 
 export interface ResultDto {

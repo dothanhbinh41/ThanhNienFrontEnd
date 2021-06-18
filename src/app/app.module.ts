@@ -16,6 +16,7 @@ import { QuestionComponent } from './question/question.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './login/login.component';
 import { ResultsComponent } from './results/results.component';
 
@@ -36,6 +37,7 @@ import { ResultsComponent } from './results/results.component';
     MatRadioModule,
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
   ],
   declarations: [AppComponent, QuestionComponent, LoginComponent, ResultsComponent],
   providers: [APP_ROUTE_PROVIDER],

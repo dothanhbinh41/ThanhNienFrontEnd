@@ -10,6 +10,12 @@ import { Component } from '@angular/core';
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+        width: 100%;
+        background: url(assets/background.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
       }
 
       @keyframes spinner {

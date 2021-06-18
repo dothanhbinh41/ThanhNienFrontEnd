@@ -1,1 +1,21 @@
-<label>{{ mark }} - {{ time }}</label>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ studentValue.name }}</mat-card-title>
+    <mat-card-subtitle>{{ studentValue.classroom }}</mat-card-subtitle>
+  </mat-card-header>
+  <h3>Chúc mừng bạn đã hoàn thành bài kiểm tra</h3>
+  <mat-card-content>
+    <p>
+      Điểm: <b>{{ result.mark }}</b>
+    </p>
+    <p>
+      Thời gian: <b>{{ result.time }} S</b>
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="list-btn">
+    <button (click)="logOut()" class="btn-submit" mat-raised-button color="primary">
+      Đăng xuất
+    </button>
+  </mat-card-actions>
+</mat-card>
