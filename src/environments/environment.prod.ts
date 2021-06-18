@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://hcm-humg.edutalk.edu.vn';
 
 export const environment = {
   production: true,
@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44374',
+    issuer: 'http://thanhnienapi.azurewebsites.net',
     redirectUri: baseUrl,
     clientId: 'ThanhNien_App',
     responseType: 'code',
@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44374',
+      url: 'http://thanhnienapi.azurewebsites.net',
       rootNamespace: 'ThanhNien',
     },
   },
