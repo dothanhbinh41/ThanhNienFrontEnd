@@ -43,12 +43,13 @@ export class QuestionComponent implements OnInit {
     this.totalTime = (this.data?.length || 0) * 200;
     this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey));
 
-    if (this.timeLeft && this.timeLeft > this.totalTime) {
-      this.onStart();
-    }
-
     if (!this.data) {
       this.router.navigate(['login']);
+      return;
+    }
+
+    if (this.timeLeft && this.timeLeft > this.totalTime) {
+      this.onStart();
     }
   }
 
