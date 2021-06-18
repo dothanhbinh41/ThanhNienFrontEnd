@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'http://thanhnienapi.azurewebsites.net',
+    issuer: 'https://thanhnienapi.azurewebsites.net',
     redirectUri: baseUrl,
     clientId: 'ThanhNien_App',
     responseType: 'code',
@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'http://thanhnienapi.azurewebsites.net',
+      url: 'https://thanhnienapi.azurewebsites.net',
       rootNamespace: 'ThanhNien',
     },
   },
