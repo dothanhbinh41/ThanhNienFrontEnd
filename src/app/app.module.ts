@@ -1,4 +1,4 @@
-import { CoreModule } from '@abp/ng.core';
+import { CoreModule, ListService } from '@abp/ng.core';
 import { registerLocale } from '@abp/ng.core/locale';
 import { SettingManagementConfigModule } from '@abp/ng.setting-management/config';
 import { TenantManagementConfigModule } from '@abp/ng.tenant-management/config';
@@ -41,7 +41,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     MatCardModule,
   ],
   declarations: [AppComponent, QuestionComponent, LoginComponent, ResultsComponent, LeaderboardComponent],
-  providers: [APP_ROUTE_PROVIDER],
+  providers: [APP_ROUTE_PROVIDER,ListService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

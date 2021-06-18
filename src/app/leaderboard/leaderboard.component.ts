@@ -11,13 +11,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./leaderboard.component.scss']
 })
 export class LeaderboardComponent implements OnInit {
-  result : PagedResultDto<UserResultDto>={}; 
-  constructor(private questionService: QuestionService) { }
+  result: PagedResultDto<UserResultDto> = {};
+  constructor(public list: ListService, private questionService: QuestionService) { }
 
-  ngOnInit(){ 
-    this.questionService.getAllUserResults({ maxResultCount: 100, skipCount: 0 }).subscribe((response: PagedResultDto<UserResultDto>) => {
-      this.result = response; 
-    }); 
+  ngOnInit() {
+    this.list.maxResultCount = 40;
+    const departmentStreamCreator = () => this.questionService.getAllUserResults({ maxResultCount: this.list.maxResultCount, skipCount: this.list.page * 40 });
+
+    this.list.hookToQuery(departmentStreamCreator).subscribe((response: PagedResultDto<UserResultDto>) => {
+      this.result = response;
+    });
   }
 
 }
