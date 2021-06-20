@@ -1,7 +1,7 @@
 <div class="container">
    
   <form class="example-form" [formGroup]="studentForm">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Họ và tên <sup>*</sup></mat-label>
       <input formControlName="name" class="input" matInput />
   
@@ -9,7 +9,7 @@
         Họ và tên là trường bắt buộc!
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Số điện thoại <sup>*</sup></mat-label>
   
       <input formControlName="phone" type="number" class="input" matInput />
@@ -17,7 +17,7 @@
         Số điện thoại là trường bắt buộc!
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Mã số sinh viên <sup>*</sup></mat-label>
       <input formControlName="studentId" class="input" matInput />
   
@@ -25,11 +25,11 @@
         Mã số sinh viên là trường bắt buộc!
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Lớp <sup>*</sup></mat-label>
       <input formControlName="classroom" class="input" matInput />
   
-      <mat-error *ngIf="studentForm.get('classroom').hasError('required')">
+      <mat-error *ngIf="studentForm.get('classroom').hasError('required')" >
         Lớp là trường bắt buộc!
       </mat-error>
     </mat-form-field>
