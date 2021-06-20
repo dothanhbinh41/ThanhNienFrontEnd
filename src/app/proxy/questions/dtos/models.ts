@@ -22,7 +22,6 @@ export interface CreateQuestionRequestDto {
 export interface QuestionDto extends EntityDto<number> {
   text?: string;
   answers: AnswerDto[];
-  answer: number;
 }
 
 export interface ResultDto {
@@ -35,7 +34,6 @@ export interface SubmitAnswersRequestDto {
   studentId?: string;
   name?: string;
   phone?: string;
-  time?: number;
   answers: ResultDto[];
 }
 

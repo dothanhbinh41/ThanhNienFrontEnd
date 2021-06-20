@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuestionService } from '@proxy/questions';
-import { IStudent, questionKey, studentKey } from '../question/question.component';
+import { studentKey } from '../question/question.component';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +10,7 @@ import { IStudent, questionKey, studentKey } from '../question/question.componen
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  studentForm: FormGroup;
-  studentValue: IStudent;
+  studentForm: FormGroup; 
   loading = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -25,20 +24,7 @@ export class LoginComponent implements OnInit {
       phone: ['', [Validators.required]],
       studentId: ['', [Validators.required]],
       classroom: ['', [Validators.required]],
-    });
-    const studentValue = JSON.parse(localStorage.getItem(studentKey));
-
-    if (studentValue) {
-      const result = await this.checkResult(studentValue.phone);
-      if (result) {
-        this.loading = false;
-        this.router.navigate(['result']);
-        this.questionService.resultStudent = result;
-      } else { 
-        this.loading = false;
-        this.router.navigate(['test']);
-      }
-    }
+    }); 
   }
 
   async onSubmit() {
@@ -52,7 +38,7 @@ export class LoginComponent implements OnInit {
       })
     );
 
-    const result = await this.checkResult(formValue.phone);
+    const result = await  this.questionService.getResult(formValue.phone).toPromise();
     if (result) {
       this.loading = false;
       this.router.navigate(['result']);
@@ -60,9 +46,5 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       this.router.navigate(['test']);
     }
-  }
-
-  async checkResult(phone) {
-    return await this.questionService.getResult(phone).toPromise();
   } 
 }

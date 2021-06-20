@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionService } from '@proxy/questions';
-import { IStudent, questionKey, studentKey, timeLeftKey } from '../question/question.component';
+import { IStudent, studentKey } from '../question/question.component';
 
 @Component({
   selector: 'app-results',
@@ -29,10 +29,7 @@ export class ResultsComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.setItem(studentKey, null);
-    localStorage.setItem(timeLeftKey, null);
-    localStorage.setItem(questionKey, null);
-
+    localStorage.clear(); 
     this.router.navigate(['login']);
   }
 }

@@ -25,13 +25,13 @@ export class QuestionComponent implements OnInit {
   phone: string;
   name: string;
   questions: QuestionModel[];
-  data: QuestionDto[];
+  data: QuestionModel[];
   studentValue: IStudent;
   totalTime = 0;
   timeLeft: number;
   started: boolean;
   loading = false;
-
+  intervalId;
   constructor(
     private questionService: QuestionService,
     private toaster: ToasterService,
@@ -50,17 +50,17 @@ export class QuestionComponent implements OnInit {
   }
 
   countdown() {
-    let intervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.timeLeft -= 1;
       localStorage.setItem(timeLeftKey, this.timeLeft.toString());
-      if (this.timeLeft === 0) {
+      if (this.timeLeft <= 0) {
         this.onSave();
-        clearInterval(intervalId);
       }
     }, 1000);
   }
 
   async onSave() {
+    clearInterval(this.intervalId);
     const finished = this.questions.filter(d => d.answer != null);
     if (finished.length === 0) {
       this.toaster.error('Bạn cần trả lời ít nhất 1 câu hỏi', 'Lỗi');
@@ -70,7 +70,7 @@ export class QuestionComponent implements OnInit {
     let request: SubmitAnswersRequestDto;
     request = {
       ...this.studentValue,
-      phone: String(this.studentValue.phone), 
+      phone: String(this.studentValue.phone),
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };
 
@@ -94,39 +94,44 @@ export class QuestionComponent implements OnInit {
     this.loading = false;
   }
 
-  async onStart() {
-    if (!this.data) { 
+  onStart() {
+    if (!this.data) {
       this.loading = true;
-      await this.getQuestion(this.studentValue.phone); 
-      this.loading = false;
+      this.questionService.getQuestions(this.studentValue.phone).subscribe(d => {
+        var md = d.items.map(
+          c => new QuestionModel(c.id, c.text, c.answers, d.items.indexOf(c) + 1, undefined)
+        )
+        localStorage.setItem(questionKey, JSON.stringify(md));
+        this.loading = false;;
+
+        this.start(md);
+      });
+
+      return;
     }
+    this.start(this.data);
+  }
+
+  start(dtos: QuestionModel[]) {
     this.started = true;
-    this.setTimeleft();
-    this.questions = this.data.map(
-      c => new QuestionModel(c.id, c.text, c.answers, this.data.indexOf(c) + 1, c.answer)
-    );
+    this.setTimeleft(dtos);
+    this.questions = dtos;
     this.countdown();
     document.getElementById('content').className = `content background-none`;
   }
 
-  setTimeleft() {
+  setTimeleft(dtos: QuestionModel[]) {
     if (!this.timeLeft) {
-      this.timeLeft = this.data.length * TimeToProcess;
+      this.timeLeft = dtos.length * TimeToProcess;
       localStorage.setItem(timeLeftKey, this.timeLeft.toString());
     }
   }
 
   removeTemp() {
-    localStorage.removeItem(timeLeftKey);
-    localStorage.removeItem(questionKey);
+    localStorage.clear();
   }
 
   changeAnswer() {
     localStorage.setItem(questionKey, JSON.stringify(this.questions));
-  }
-
-  async getQuestion(phone) {
-    var questions = await this.questionService.getQuestions(phone).toPromise();
-    localStorage.setItem(questionKey, JSON.stringify(questions.items));
   }
 }
