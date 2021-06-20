@@ -1,19 +1,27 @@
 .example-form {
   min-width: 150px;
   width: 500px;
+  max-width: 100%;
 
   .example-full-width {
     width: 100%;
     margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: solid 1px #fff;
+    padding: 4px;
+    border-radius: 4px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
     mat-label {
       font-size: 16px;
+      color: white;
       sup {
         color: red;
       }
     }
 
     .input {
+      color: white;
       font-size: 16px;
       line-height: 1.8;
     }
@@ -24,5 +32,32 @@
     padding: 8px;
     text-transform: uppercase;
     font-size: 18px;
+    background-color: transparent;
+    border: solid 2px #fff;
+    transition: background-color 400ms ease-in-out;
+
+    &:hover {
+      background-color: rgb(50, 74, 206);
+      border-color: rgb(50, 74, 206);
+    }
+  }
+}
+
+::ng-deep {
+  #content {
+    background: url('/assets/bg-login.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  app-login {
+    height: 100vh;
+    width: 100%;
+    .example-form {
+      height: 100%;
+      margin: 12rem 8rem 8rem auto;
+    }
   }
 }

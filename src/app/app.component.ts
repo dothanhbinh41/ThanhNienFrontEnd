@@ -2,20 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: ` <main class="content"><router-outlet></router-outlet></main>`,
+  template: ` <main id="content"><router-outlet></router-outlet></main>`,
   styles: [
     `
-      .content {
+      #content {
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
         width: 100%;
-        background: url(assets/background.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
       }
 
       @keyframes spinner {

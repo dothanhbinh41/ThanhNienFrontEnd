@@ -41,13 +41,8 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     this.studentValue = JSON.parse(localStorage.getItem(studentKey));
     this.data = JSON.parse(localStorage.getItem(questionKey));
-    this.totalTime = (this.data?.length || 0) * TimeToProcess;
+    this.totalTime = 30 * TimeToProcess;
     this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey));
-
-    if (!this.data) {
-      this.router.navigate(['login']);
-      return;
-    }
 
     if (this.timeLeft && this.timeLeft < this.totalTime) {
       this.onStart();
@@ -76,11 +71,19 @@ export class QuestionComponent implements OnInit {
     request = {
       ...this.studentValue,
       phone: String(this.studentValue.phone),
-      time: this.totalTime - this.timeLeft,
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };
 
-    const result = await this.questionService.submitAnswers(request).toPromise();
+    const result = await this.questionService
+      .submitAnswers(request)
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
+
     if (result) {
       this.removeTemp();
       this.toaster.success('Nộp bài thành công!!!', 'Thành công');
@@ -91,13 +94,20 @@ export class QuestionComponent implements OnInit {
     this.loading = false;
   }
 
-  onStart() {
+  async onStart() {
+    if (!this.data) {
+      this.loading = true;
+      await this.getQuestion(this.studentValue.phone);
+      this.loading = false;
+    }
+
     this.started = true;
     this.setTimeleft();
     this.questions = this.data.map(
       c => new QuestionModel(c.id, c.text, c.answers, this.data.indexOf(c) + 1, c.answer)
     );
     this.countdown();
+    document.getElementById('content').className = `content background-none`;
   }
 
   setTimeleft() {
@@ -114,5 +124,10 @@ export class QuestionComponent implements OnInit {
 
   changeAnswer() {
     localStorage.setItem(questionKey, JSON.stringify(this.questions));
+  }
+
+  async getQuestion(phone) {
+    var questions = await this.questionService.getQuestions(phone).toPromise();
+    localStorage.setItem(questionKey, JSON.stringify(questions.items));
   }
 }

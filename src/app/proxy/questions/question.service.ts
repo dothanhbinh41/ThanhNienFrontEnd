@@ -17,10 +17,11 @@ export class QuestionService {
     },
     { apiName: this.apiName });
 
-  getQuestions = () =>
+  getQuestions = (phone: string) =>
     this.restService.request<any, ListResultDto<QuestionDto>>({
       method: 'GET',
       url: '/api/app/question/questions',
+      params: { phone },
     },
     { apiName: this.apiName });
 
@@ -28,6 +29,15 @@ export class QuestionService {
     this.restService.request<any, UserResultDto>({
       method: 'GET',
       url: '/api/app/question/result',
+      params: { phone },
+    },
+    { apiName: this.apiName });
+
+  getStartTime = (phone: string) =>
+    this.restService.request<any, string>({
+      method: 'GET',
+      responseType: 'text',
+      url: '/api/app/question/start-time',
       params: { phone },
     },
     { apiName: this.apiName });

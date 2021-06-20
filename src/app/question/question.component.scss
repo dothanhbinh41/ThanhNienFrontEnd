@@ -3,13 +3,13 @@ $primary-color: #662d91;
 mat-label,
 .mat-input-element {
   font-size: 18px;
-  color: black !important;
+  color: white !important;
 }
 
 .container {
   width: 1280px;
   max-width: 100%;
-  margin: 0 auto;
+  color: white;
   .question-radio-group {
     display: flex;
     flex-direction: column;
@@ -35,6 +35,8 @@ mat-label,
       .logo-text {
         font-size: 36px;
         font-weight: 900;
+        line-height: 1.3;
+        letter-spacing: 1px;
         margin: 0 4px;
       }
     }
@@ -67,11 +69,80 @@ mat-label,
 }
 
 .time-left {
+  position: sticky;
+  top: 0;
+  height: 60px;
   font-size: 18px;
-  padding-bottom: 20px;
+  text-transform: uppercase;
+  padding-right: 20px;
+  color: white;
+  background: linear-gradient(0.25turn, #e25a78, #b60017);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
 }
 
 .submit-btn {
-  background-color: $primary-color;
+  background-color: #da7e89;
+  margin: auto;
   margin-bottom: 30px;
+  width: 200px;
+}
+
+::ng-deep {
+  #content {
+    background: url('/assets/bg-question.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    &.background-none {
+      background: none;
+      background-color: lightgray;
+      app-question {
+        .mat-form-field-outline {
+          color: rgba(0, 0, 0, 0.38) !important;
+        }
+
+        .welcome-content {
+          padding: 0 1rem;
+        }
+        mat-label,
+        .mat-input-element {
+          color: inherit !important;
+        }
+
+        .user-info {
+          padding: 0 1rem;
+        }
+      }
+
+      .container {
+        color: #212529;
+        background: white;
+        margin: auto;
+        padding: 0;
+
+        .list-question {
+          margin: 1rem;
+        }
+      }
+    }
+  }
+
+  app-question {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+
+    .container {
+      margin: auto auto 2rem auto;
+    }
+
+    .mat-form-field-outline {
+      color: #fff !important;
+    }
+  }
 }

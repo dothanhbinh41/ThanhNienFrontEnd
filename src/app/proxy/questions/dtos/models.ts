@@ -16,6 +16,7 @@ export interface CreateQuestionDto {
 
 export interface CreateQuestionRequestDto {
   questions: CreateQuestionDto[];
+  password?: string;
 }
 
 export interface QuestionDto extends EntityDto<number> {
@@ -30,13 +31,17 @@ export interface ResultDto {
 }
 
 export interface SubmitAnswersRequestDto {
+  classroom?: string;
+  studentId?: string;
   name?: string;
   phone?: string;
-  time: number;
+  time?: number;
   answers: ResultDto[];
 }
 
 export interface UserResultDto {
+  classroom?: string;
+  studentId?: string;
   name?: string;
   phone?: string;
   time: number;
