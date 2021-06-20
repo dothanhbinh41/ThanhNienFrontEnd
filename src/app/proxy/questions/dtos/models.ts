@@ -22,7 +22,7 @@ export interface CreateQuestionRequestDto {
 export interface QuestionDto extends EntityDto<number> {
   text?: string;
   answers: AnswerDto[];
-  answer?: number;
+  answer: number;
 }
 
 export interface ResultDto {
@@ -46,5 +46,5 @@ export interface UserResultDto {
   phone?: string;
   time: number;
   mark: number;
-  rank?:number;
+  rank?: number;
 }

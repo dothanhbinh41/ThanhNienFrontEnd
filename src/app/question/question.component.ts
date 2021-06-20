@@ -36,7 +36,7 @@ export class QuestionComponent implements OnInit {
     private questionService: QuestionService,
     private toaster: ToasterService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.studentValue = JSON.parse(localStorage.getItem(studentKey));
@@ -70,7 +70,7 @@ export class QuestionComponent implements OnInit {
     let request: SubmitAnswersRequestDto;
     request = {
       ...this.studentValue,
-      phone: String(this.studentValue.phone),
+      phone: String(this.studentValue.phone), 
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };
 
@@ -95,12 +95,11 @@ export class QuestionComponent implements OnInit {
   }
 
   async onStart() {
-    if (!this.data) {
+    if (!this.data) { 
       this.loading = true;
-      await this.getQuestion(this.studentValue.phone);
+      await this.getQuestion(this.studentValue.phone); 
       this.loading = false;
     }
-
     this.started = true;
     this.setTimeleft();
     this.questions = this.data.map(
