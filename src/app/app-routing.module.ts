@@ -4,25 +4,36 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LoginComponent } from './login/login.component';
 import { QuestionComponent } from './question/question.component';
 import { ResultsComponent } from './results/results.component';
+import { StartComponent } from './starts/start.component';
+ 
+export const LOGIN_PATH : string ="login"; 
+export const TEST_PATH : string ="test"; 
+export const START_PATH : string ="start"; 
+export const RESULT_PATH : string ="result";
+export const LEADERBOARD_PATH : string ="top";
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: LOGIN_PATH,
     component: LoginComponent,
   },
   {
-    path: 'test',
+    path: TEST_PATH,
     component: QuestionComponent,
   },
   {
-    path: 'result',
+    path: START_PATH,
+    component: StartComponent,
+  },
+  {
+    path: RESULT_PATH,
     component: ResultsComponent,
   },
   {
-    path: 'top',
+    path: LEADERBOARD_PATH,
     component: LeaderboardComponent,
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: LOGIN_PATH, pathMatch: 'full' },
 ];
 
 @NgModule({

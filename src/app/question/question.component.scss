@@ -1,82 +1,53 @@
 $primary-color: #662d91;
-
-mat-label,
-.mat-input-element {
-  font-size: 18px;
-  color: white !important;
-}
-
-.container {
-  width: 1280px;
+.container{ 
+  margin-top: 70px;
   max-width: 100%;
-  color: white;
-  .question-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-  }
-
-  .question-radio-button {
-    margin: 5px;
-    font-size: 16px;
-  }
-
-  .welcome-content {
-    .welcome-text {
-      font-weight: bold;
-      font-size: 24px;
-      margin-bottom: 0;
-    }
-
-    .welcome-sub-text {
-      font-weight: bold;
-      font-size: 26px;
-
-      .logo-text {
-        font-size: 36px;
-        font-weight: 900;
-        line-height: 1.3;
-        letter-spacing: 1px;
-        margin: 0 4px;
-      }
+  flex-direction: column;  
+  padding-bottom: 15px;
+  display: flex; 
+  align-items: center;
+  .list-question {  
+    align-items: center; 
+    width: 70%;
+    max-width: 70%; 
+    color: black;   
+    .question-radio-group { 
+      display: flex;
+      flex-direction: column; 
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    } 
+    .question-radio-button {
+      margin: 5px;
+      font-size: 16px;
     }
   }
-
-  .user-info {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-
-    .example-full-width {
-      flex: 1;
-      margin-right: 15px;
-    }
-
-    .start-btn {
-      width: 100%;
-      height: 40px;
-      text-transform: uppercase;
-      background-color: $primary-color;
-      flex: 2;
-      height: 55px;
-      font-size: 18px;
-
-      &.hidden {
-        display: none;
-      }
-    }
-  }
+  
 }
 
-.time-left {
-  position: sticky;
+.question-label{ 
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.time-left-container {
+  overflow: hidden;
+  position: fixed;
   top: 0;
+  width: 100%;
   height: 60px;
-  font-size: 18px;
-  text-transform: uppercase;
-  padding-right: 20px;
-  color: white;
   background: linear-gradient(0.25turn, #e25a78, #b60017);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+.time-left {
+  width: 70%;
+  height: 60px;
+  font-size: 18px; 
+  text-transform: uppercase;
+  color: white;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -84,85 +55,14 @@ mat-label,
 }
 
 .submit-btn {
-  background-color: #da7e89;
-  margin: auto;
+  background-color: #b60017; 
   margin-bottom: 30px;
+  margin-top: 30px;
   width: 200px;
 }
 
 ::ng-deep {
-  #content {
-    background: url('/assets/bg-question.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-
-    &.background-none {
-      background: none;
-      background-color: lightgray;
-      app-question {
-        .mat-form-field-outline {
-          color: rgba(0, 0, 0, 0.38) !important;
-        }
-
-        .welcome-content {
-          padding: 0 1rem;
-        }
-        mat-label,
-        .mat-input-element {
-          color: inherit !important;
-        }
-
-        .user-info {
-          padding: 0 1rem;
-        }
-      }
-
-      .container {
-        color: #212529;
-        background: white;
-        margin: auto;
-        padding: 0;
-
-        .list-question {
-          margin: 1rem;
-        }
-      }
-    }
-  }
-
   app-question {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-
-    .container {
-      margin: auto auto 2rem auto;
-    }
-
-    .mat-form-field-outline {
-      color: #fff !important;
-    }
-  }
-}
-
-::ng-deep {
-  .content {
-    background: url('/assets/bg-question.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-
-  app-question {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-
-    .container {
-      margin: auto auto 2rem auto;
-    }
+    width: 100%; 
   }
 }

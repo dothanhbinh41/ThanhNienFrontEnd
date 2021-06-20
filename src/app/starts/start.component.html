@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="welcome-content">
+    <div>
+      <h1 class="welcome-text">Chào Mừng</h1>
+      <p class="welcome-sub-text">Đến <span class="logo-text">CUỘC THI TRỰC TUYẾN</span></p>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Họ và tên</mat-label>
+      <input disabled value="{{ studentValue?.name }}" class="input" matInput />
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Lớp</mat-label>
+      <input disabled value="{{ studentValue?.classroom }}" class="input" matInput />
+    </mat-form-field>
+    <button mat-raised-button color="accent" class="start-btn" (click)="onStart()">
+      Vào bài thi
+    </button>
+  </div>
+</div>

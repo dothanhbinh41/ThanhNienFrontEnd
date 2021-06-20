@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuestionService } from '@proxy/questions';
-import { studentKey } from '../question/question.component';
+import { RESULT_PATH, START_PATH, TEST_PATH } from '../app-routing.module';
+import { resultKey, studentKey } from '../question/question.component';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    localStorage.clear();
     this.studentForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -41,10 +43,11 @@ export class LoginComponent implements OnInit {
     const result = await  this.questionService.getResult(formValue.phone).toPromise();
     if (result) {
       this.loading = false;
-      this.router.navigate(['result']);
+      localStorage.setItem(resultKey,JSON.stringify(result));
+      this.router.navigate([RESULT_PATH]);
     } else { 
       this.loading = false;
-      this.router.navigate(['test']);
+      this.router.navigate([START_PATH]);
     }
   } 
 }

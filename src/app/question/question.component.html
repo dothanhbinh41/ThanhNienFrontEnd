@@ -1,72 +1,22 @@
+<div class="time-left-container">
+  <div class="time-left">
+    Thời gian: <b style="margin: 0 0.5rem">{{ timeLeft }}</b> giây
+  </div>
+</div>
 <div class="container">
-  <div class="welcome-content {{ started ? 'start-test' : '' }}">
+  <div class="list-question" *ngFor="let question of questions">
+    <label class="question-label">{{ question.index }} - {{ question.text }}</label>
     <div>
-      <h1 class="welcome-text">Chào Mừng</h1>
-      <p class="welcome-sub-text">Đến <span class="logo-text">CUỘC THI TRỰC TUYẾN</span></p>
+      <mat-radio-group aria-labelledby="question-radio-group-label" class="question-radio-group"
+        [(ngModel)]="question.answer" (change)="changeAnswer()">
+        <mat-radio-button class="question-radio-button" *ngFor="let answer of question.answers" [value]="answer.id">
+          {{ answer.text }}
+        </mat-radio-button>
+      </mat-radio-group>
     </div>
   </div>
-
-  <div class="user-info">
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Họ và tên</mat-label>
-      <input disabled value="{{ studentValue?.name }}" class="input" matInput />
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Lớp</mat-label>
-      <input disabled value="{{ studentValue?.classroom }}" class="input" matInput />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="accent"
-      class="start-btn"
-      (click)="onStart()"
-      [class]="started ? 'hidden' : ''"
-      [ngStyle]="{ visibility: started ? 'hidden' : 'visible' }"
-    >
-      Vào bài thi
-    </button>
-  </div>
-
-  <div
-    [ngStyle]="{ visibility: started ? 'visible' : 'hidden' }"
-    [style.display]="started ? 'flex' : 'none'"
-    style="flex-direction: column;"
-  >
-    <div class="time-left">
-      Thời gian: <b style="margin: 0 0.5rem">{{ timeLeft }}</b> giây
-    </div>
-
-    <div class="list-question">
-      <div *ngFor="let question of questions">
-        <label>{{ question.index }} - {{ question.text }}</label>
-        <div>
-          <mat-radio-group
-            aria-labelledby="question-radio-group-label"
-            class="question-radio-group"
-            [(ngModel)]="question.answer"
-            (change)="changeAnswer()"
-          >
-            <mat-radio-button
-              class="question-radio-button"
-              *ngFor="let answer of question.answers"
-              [value]="answer.id"
-            >
-              {{ answer.text }}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-    </div>
-    
-    <button
-      [class.spinner]="loading"
-      [disabled]="loading"
-      class="submit-btn"
-      mat-raised-button
-      color="accent"
-      (click)="onSave()"
-    >
-      Nộp Bài
-    </button>
-  </div>
+  <button [class.spinner]="loading" [disabled]="loading" class="submit-btn" mat-raised-button color="accent"
+    (click)="onSave()">
+    Nộp Bài
+  </button>
 </div>

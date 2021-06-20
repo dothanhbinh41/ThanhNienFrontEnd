@@ -1,35 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionService } from '@proxy/questions';
-import { IStudent, studentKey } from '../question/question.component';
+import { UserResultDto } from '@proxy/questions/dtos';
+import { LOGIN_PATH } from '../app-routing.module';
+import { IStudent, resultKey, studentKey } from '../question/question.component';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
 })
-export class ResultsComponent implements OnInit {
-  mark: number;
-  time: number;
+export class ResultsComponent implements OnInit { 
   studentValue: IStudent = JSON.parse(localStorage.getItem(studentKey)) as IStudent;
-  result: any;
-  constructor(private questionService: QuestionService, private router: Router) {}
+  result: UserResultDto={mark:0,time:0};
+  constructor(private questionService: QuestionService, private router: Router) { }
 
   ngOnInit() {
-    if (this.questionService.resultStudent) {
-      this.result = this.questionService.resultStudent;
+    const tempdata = localStorage.getItem(resultKey);
+    if (tempdata) {
+      this.result = JSON.parse(tempdata);
     } else {
       this.questionService
-        .getResult(this.studentValue.phone)
-        .toPromise()
-        .then(data => {
+        .getResult(this.studentValue.phone) 
+        .subscribe(data => {
           this.result = data;
         });
     }
   }
 
   logOut() {
-    localStorage.clear(); 
-    this.router.navigate(['login']);
+    localStorage.clear();
+    this.router.navigateByUrl(LOGIN_PATH);
   }
 }

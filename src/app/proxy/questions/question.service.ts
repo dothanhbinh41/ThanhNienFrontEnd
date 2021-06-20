@@ -56,9 +56,7 @@ export class QuestionService {
       url: '/api/app/question/submit-answers',
       body: request,
     },
-    { apiName: this.apiName });
-
-  resultStudent = null;
+    { apiName: this.apiName }); 
 
   constructor(private restService: RestService) {}
 }

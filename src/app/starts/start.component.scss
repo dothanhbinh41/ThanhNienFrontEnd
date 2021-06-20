@@ -1,0 +1,134 @@
+$primary-color: #662d91;
+
+mat-label,
+.mat-input-element {
+  font-size: 18px;
+  color: white !important;
+}
+
+.container {
+  width: 1280px;
+  max-width: 100%;
+  color: white; 
+
+  .welcome-content {
+    .welcome-text {
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+
+    .welcome-sub-text {
+      font-weight: bold;
+      font-size: 26px;
+
+      .logo-text {
+        font-size: 36px;
+        font-weight: 900;
+        line-height: 1.3;
+        letter-spacing: 1px;
+        margin: 0 4px;
+      }
+    }
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+
+    .example-full-width {
+      flex: 1;
+      margin-right: 15px;
+    }
+ 
+    .start-btn {
+      width: 200px;
+      height: 56px;
+      padding: 8px;
+      text-transform: uppercase;
+      font-size: 18px;
+      background-color: transparent;
+      border: solid 1px #fff;
+      transition: background-color 400ms ease-in-out;
+      margin-top: 2px;
+  
+      &:hover {
+        background-color: rgb(50, 74, 206);
+        border-color: rgb(50, 74, 206);
+      }
+    }
+  }
+}
+  
+::ng-deep {
+  #content {
+ 
+
+    &.background-none {
+      background: none;
+      background-color: lightgray;
+      app-start {
+        
+        .welcome-content {
+          padding: 0 1rem;
+        }
+        mat-label,
+        .mat-input-element {
+          color: inherit !important;
+        }
+
+        .user-info {
+          padding: 0 1rem;
+        }
+      }
+
+      .container {
+        color: #212529;
+        background: white;
+        margin: auto;
+        padding: 0;
+
+        .list-question {
+          margin: 1rem;
+        }
+      }
+    }
+  }
+
+  app-start {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    background: url('/assets/bg-question.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .container {
+      margin: auto auto 2rem auto;
+    }
+
+    .mat-form-field-outline {
+      color: #fff !important;
+    }
+  }
+}
+
+::ng-deep {
+  .content {
+    
+  }
+
+  app-question {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    
+
+    .container {
+      margin: auto auto 2rem auto;
+    }
+  }
+}

@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionService } from '@proxy/questions';
 import { AnswerDto, QuestionDto, SubmitAnswersRequestDto } from '@proxy/questions/dtos';
+import { LOGIN_PATH, RESULT_PATH } from '../app-routing.module';
 import { QuestionModel } from './question.model';
 
 export const questionKey = 'question';
 export const timeLeftKey = 'timeLeft';
 export const studentKey = 'student';
+export const resultKey = 'result';
 export const TimeToProcess = 20; //second
 
 export interface IStudent {
@@ -24,12 +26,10 @@ export interface IStudent {
 export class QuestionComponent implements OnInit {
   phone: string;
   name: string;
-  questions: QuestionModel[];
-  data: QuestionModel[];
-  studentValue: IStudent;
-  totalTime = 0;
+  questions: QuestionModel[]; 
+  studentValue: IStudent; 
   timeLeft: number;
-  started: boolean;
+  started: boolean  = true;
   loading = false;
   intervalId;
   constructor(
@@ -40,15 +40,22 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.studentValue = JSON.parse(localStorage.getItem(studentKey));
-    this.data = JSON.parse(localStorage.getItem(questionKey));
-    this.totalTime = 30 * TimeToProcess;
-    this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey));
-
-    if (this.timeLeft && this.timeLeft < this.totalTime) {
-      this.onStart();
-    }
+    this.questions = JSON.parse(localStorage.getItem(questionKey)); 
+    this.timeLeft = JSON.parse(localStorage.getItem(timeLeftKey)); 
+    if(!this.questions){
+      this.router.navigate([LOGIN_PATH]);
+    } 
+    this.setTimeleft();
+    this.countdown();
   }
 
+  setTimeleft() {
+    if (!this.timeLeft) {
+      this.timeLeft = this.questions.length * TimeToProcess;
+      localStorage.setItem(timeLeftKey, this.timeLeft.toString());
+    }
+  }
+  
   countdown() {
     this.intervalId = setInterval(() => {
       this.timeLeft -= 1;
@@ -63,8 +70,8 @@ export class QuestionComponent implements OnInit {
     clearInterval(this.intervalId);
     const finished = this.questions.filter(d => d.answer != null);
     if (finished.length === 0) {
-      this.toaster.error('Bạn cần trả lời ít nhất 1 câu hỏi', 'Lỗi');
-      return;
+      //this.toaster.error('Bạn cần trả lời ít nhất 1 câu hỏi', 'Lỗi');
+      //return;
     }
     this.loading = true;
     let request: SubmitAnswersRequestDto;
@@ -87,48 +94,19 @@ export class QuestionComponent implements OnInit {
     if (result) {
       this.removeTemp();
       this.toaster.success('Nộp bài thành công!!!', 'Thành công');
-      this.router.navigateByUrl('/result');
+      this.router.navigateByUrl(RESULT_PATH);
     } else {
-      this.toaster.error('Không nộp được bài', 'Lỗi');
+      this.toaster.error('Không nộp được bài, ban hay dang nhap lai', 'Lỗi');
+      this.router.navigateByUrl(LOGIN_PATH);
     }
     this.loading = false;
   }
+ 
 
-  onStart() {
-    if (!this.data) {
-      this.loading = true;
-      this.questionService.getQuestions(this.studentValue.phone).subscribe(d => {
-        var md = d.items.map(
-          c => new QuestionModel(c.id, c.text, c.answers, d.items.indexOf(c) + 1, undefined)
-        )
-        localStorage.setItem(questionKey, JSON.stringify(md));
-        this.loading = false;;
-
-        this.start(md);
-      });
-
-      return;
-    }
-    this.start(this.data);
-  }
-
-  start(dtos: QuestionModel[]) {
-    this.started = true;
-    this.setTimeleft(dtos);
-    this.questions = dtos;
-    this.countdown();
-    document.getElementById('content').className = `content background-none`;
-  }
-
-  setTimeleft(dtos: QuestionModel[]) {
-    if (!this.timeLeft) {
-      this.timeLeft = dtos.length * TimeToProcess;
-      localStorage.setItem(timeLeftKey, this.timeLeft.toString());
-    }
-  }
 
   removeTemp() {
-    localStorage.clear();
+    localStorage.removeItem(questionKey);
+    localStorage.removeItem(timeLeftKey);
   }
 
   changeAnswer() {
