@@ -5,7 +5,10 @@ $primary-color: #b60017;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+}
+
+.mat-card>.mat-card-actions:last-child {
+  padding-bottom: 1rem;
 }
 
 .example-card {

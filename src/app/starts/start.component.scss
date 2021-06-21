@@ -36,6 +36,8 @@ mat-label,
     display: flex;
     flex-direction: row;
     margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 
     .example-full-width {
       flex: 1;
@@ -107,7 +109,7 @@ mat-label,
     background-size: cover;
 
     .container {
-      margin: auto auto 2rem auto;
+      margin: auto auto 0.5rem auto;
     }
 
     .mat-form-field-outline {
@@ -117,18 +119,13 @@ mat-label,
 }
 
 ::ng-deep {
-  .content {
-    
-  }
-
   app-question {
     height: 100vh;
     width: 100%;
     display: flex;
     
-
     .container {
-      margin: auto auto 2rem auto;
+      margin: auto auto 0.5rem auto;
     }
   }
 }
