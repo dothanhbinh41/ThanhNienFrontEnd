@@ -10,6 +10,9 @@
 	# RewriteCond %{HTTPS} !on
   	# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
 	# --
+	#remove https
+	RewriteCond %{HTTP:X-Forwarded-Proto} =https
+	RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 	RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
 	RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
