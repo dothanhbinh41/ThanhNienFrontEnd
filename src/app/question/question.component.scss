@@ -80,6 +80,7 @@ $primary-color: #662d91;
   left: 0;
   right: 0;
   transform: translateY(-50%);
+  z-index: -1;
 }
 
 @media only screen and (max-width: 999.5px) {
