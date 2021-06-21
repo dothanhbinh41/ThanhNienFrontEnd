@@ -4,19 +4,26 @@
   </div>
 </div>
 <div class="container">
-  <div class="list-question" *ngFor="let question of questions">
-    <label class="question-label">{{ question.index }} - {{ question.text }}</label>
-    <div>
-      <mat-radio-group aria-labelledby="question-radio-group-label" class="question-radio-group"
-        [(ngModel)]="question.answer" (change)="changeAnswer()">
-        <mat-radio-button class="question-radio-button" *ngFor="let answer of question.answers" [value]="answer.id">
-          {{ answer.text }}
-        </mat-radio-button>
-      </mat-radio-group>
+  <div class="list-question">
+    <div *ngFor="let question of questions">
+      <label class="question-label">{{ question.index }} - {{ question.text }}</label>
+      <div>
+        <mat-radio-group aria-labelledby="question-radio-group-label" class="question-radio-group"
+          [(ngModel)]="question.answer" (change)="changeAnswer()">
+          <mat-radio-button class="question-radio-button" *ngFor="let answer of question.answers" [value]="answer.id">
+            {{ answer.text }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
     </div>
   </div>
   <button [class.spinner]="loading" [disabled]="loading" class="submit-btn" mat-raised-button color="accent"
     (click)="onSave()">
     Nộp Bài
   </button>
+</div>
+
+<div class="edutalk-content">
+  <img src="/assets/don-vi-tai-tro.jpg" alt="don-vi-tai-tro" width="150">
+  <img src="/assets/edutalk-tai-tro.jpg" alt="edutalk-tai-tro" width="150">
 </div>
