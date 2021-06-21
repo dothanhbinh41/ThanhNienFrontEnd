@@ -11,7 +11,6 @@ import { Component } from '@angular/core';
         align-items: center;
         min-height: 100vh; 
         width: 100%;
-        max-height: 100%;
       }
 
       @keyframes spinner {
