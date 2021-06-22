@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 import { ResultsComponent } from './results/results.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
@@ -40,6 +41,7 @@ import { StartComponent } from './starts/start.component';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
+    MatDialogModule,
   ],
   declarations: [AppComponent, QuestionComponent,StartComponent, LoginComponent, ResultsComponent, LeaderboardComponent],
   providers: [APP_ROUTE_PROVIDER,ListService],
