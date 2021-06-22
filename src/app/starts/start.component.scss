@@ -9,7 +9,7 @@ mat-label,
 .container {
   width: 1280px;
   max-width: 100%;
-  color: white; 
+  color: white;
 
   .welcome-content {
     .welcome-text {
@@ -35,26 +35,29 @@ mat-label,
   .user-info {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-end;
+    gap: 1.5rem;
 
     .example-full-width {
       flex: 1;
       margin-right: 15px;
     }
- 
+
     .start-btn {
-      width: 200px;
-      height: 56px;
-      padding: 8px;
+      flex: 1;
+      height: 3rem;
+      padding: 0 8px;
       text-transform: uppercase;
       font-size: 18px;
       background-color: transparent;
       border: solid 1px #fff;
       transition: background-color 400ms ease-in-out;
       margin-top: 2px;
-  
+
       &:hover {
         background-color: rgb(50, 74, 206);
         border-color: rgb(50, 74, 206);
@@ -62,16 +65,13 @@ mat-label,
     }
   }
 }
-  
+
 ::ng-deep {
   #content {
- 
-
     &.background-none {
       background: none;
       background-color: lightgray;
       app-start {
-        
         .welcome-content {
           padding: 0 1rem;
         }
@@ -115,6 +115,11 @@ mat-label,
     .mat-form-field-outline {
       color: #fff !important;
     }
+
+    @media only screen and (max-width: 768.5px) {
+      background: url('/assets/bg-question-mobile.png');
+      background-size: cover;
+    }
   }
 }
 
@@ -123,9 +128,101 @@ mat-label,
     height: 100vh;
     width: 100%;
     display: flex;
-    
+
     .container {
       margin: auto auto 0.5rem auto;
     }
+  }
+}
+
+.input {
+  height: 3rem;
+  border-radius: 0.25rem;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 0 1rem;
+  flex: 2;
+  &::placeholder {
+    color: #fff;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 768.5px) {
+  .container {
+    margin: 0;
+    padding-top: 0.5rem;
+    margin-bottom: auto;
+
+    .welcome-content {
+      text-align: center;
+
+      .welcome-text,
+      .welcome-sub-text {
+        font-size: 14px;
+
+        .logo-text {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .user-info {
+      margin-top: 0.5rem;
+      padding-bottom: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+
+      .start-btn {
+        width: 50%;
+        height: 2.5rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size: 16px;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .input {
+    width: 100%;
+    flex: unset;
+    margin-bottom: 0.5rem;
+  }
+}
+
+::ng-deep .custom-dialog {
+  max-width: 100vw !important;
+  mat-dialog-container {
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.edutalk-promotion {
+  position: relative;
+
+  .close-dialog {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 4px 8px;
+    z-index: 1;
+  }
+
+  img {
+    margin: 0 auto;
+    object-fit: cover;
+    max-width: 500px;
+    width: 100%;
+    height: 100%;
   }
 }

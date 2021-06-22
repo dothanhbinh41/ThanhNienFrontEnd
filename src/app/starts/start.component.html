@@ -7,16 +7,18 @@
   </div>
 
   <div class="user-info">
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Họ và tên</mat-label>
-      <input disabled value="{{ studentValue?.name }}" class="input" matInput />
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Lớp</mat-label>
-      <input disabled value="{{ studentValue?.classroom }}" class="input" matInput />
-    </mat-form-field>
+    <input [value]="'Họ và tên: ' + studentValue?.name" class="input" disabled />
+    <input [value]="'Lớp: ' + studentValue?.classroom" class="input" disabled />
+
     <button mat-raised-button color="accent" class="start-btn" (click)="onStart()">
       Vào bài thi
     </button>
   </div>
 </div>
+
+<ng-template #dialogRef let-data>
+  <div class="edutalk-promotion">
+    <span matDialogClose class="close-dialog">X</span>
+    <img src="assets/edutalk-mobile.png" alt="" />
+  </div>
+</ng-template>

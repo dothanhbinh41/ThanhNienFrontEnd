@@ -26,11 +26,11 @@
       line-height: 1.8;
     }
   }
- 
 
   .btn-submit {
     width: 100%;
-    padding: 8px;
+    height: 3rem;
+    padding: 0 8px;
     text-transform: uppercase;
     font-size: 18px;
     background-color: transparent;
@@ -53,15 +53,62 @@
 }
 ::ng-deep {
   app-login {
-    background: url('/assets/bg-login.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    background: url('/assets/bg-login.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100%;
     width: 100%;
     .example-form {
       height: 100%;
     }
+
+    @media only screen and (max-width: 768.5px) {
+      background: url('/assets/bg-login-mobile.png');
+      background-size: cover;
+    }
+  }
+}
+
+.input {
+  height: 3rem;
+  border-radius: 0.25rem;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 0 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  &::placeholder {
+    color: #fff;
+    font-weight: 700;
+  }
+}
+
+.input {
+  height: 3rem;
+  border-radius: 0.25rem;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  padding: 0 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  &::placeholder {
+    color: #fff;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 768.5px) {
+  .container {
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 1rem;
+  }
+
+  .input {
+    margin-bottom: 0.5rem;
   }
 }
