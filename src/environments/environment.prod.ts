@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'http://thanhnienapi.edutalk.edu.vn',
+    issuer: 'https://thanhnienapi.edutalk.edu.vn',
     redirectUri: baseUrl,
     clientId: 'ThanhNien_App',
     responseType: 'code',
@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'http://thanhnienapi.edutalk.edu.vn',
+      url: 'https://thanhnienapi.edutalk.edu.vn',
       rootNamespace: 'ThanhNien',
     },
   },
