@@ -101,6 +101,18 @@
   }
 }
 
+.select-box {
+  option {
+    background-color: rgba(0, 0, 0, 0.726);
+    padding: 0.25rem 0;
+    text-indent: 5px;
+  }
+
+  &.font-bold {
+    font-weight: bold;
+  }
+}
+
 @media only screen and (max-width: 768.5px) {
   .container {
     justify-content: center;
