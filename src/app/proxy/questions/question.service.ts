@@ -21,7 +21,7 @@ export class QuestionService {
     this.restService.request<any, PagedResultDto<UserResultDto>>({
       method: 'GET',
       url: '/api/app/question/user-results',
-      params: { maxResultCount: request.maxResultCount, skipCount: request.skipCount },
+      params: { skipCount: request.skipCount, maxResultCount: request.maxResultCount },
     },
     { apiName: this.apiName });
 

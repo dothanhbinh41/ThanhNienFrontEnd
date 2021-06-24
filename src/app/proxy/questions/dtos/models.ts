@@ -1,4 +1,5 @@
 import type { EntityDto } from '@abp/ng.core';
+import type { DepartmentDto } from '../../departments/dtos/models';
 
 export interface AnswerDto extends EntityDto<number> {
   text?: string;
@@ -51,6 +52,7 @@ export interface UserResultDto {
   name?: string;
   phone?: string;
   time: number;
-  departmentId: number;
+  department: DepartmentDto;
   mark: number;
+  rank?:number;
 }

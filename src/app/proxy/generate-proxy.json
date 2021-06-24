@@ -3,55 +3,51 @@
     "app"
   ],
   "modules": {
-    "settingManagement": {
-      "rootPath": "settingManagement",
-      "remoteServiceName": "SettingManagement",
+    "app": {
+      "rootPath": "app",
+      "remoteServiceName": "Default",
       "controllers": {
-        "Volo.Abp.SettingManagement.EmailSettingsController": {
-          "controllerName": "EmailSettings",
-          "type": "Volo.Abp.SettingManagement.EmailSettingsController",
+        "ThanhNien.Questions.QuestionAppService": {
+          "controllerName": "Question",
+          "type": "ThanhNien.Questions.QuestionAppService",
           "interfaces": [
             {
-              "type": "Volo.Abp.SettingManagement.IEmailSettingsAppService"
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "ThanhNien.Questions.IQuestionAppService"
             }
           ],
           "actions": {
-            "GetAsync": {
-              "uniqueName": "GetAsync",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/setting-management/emailing",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.SettingManagement.EmailSettingsDto",
-                "typeSimple": "Volo.Abp.SettingManagement.EmailSettingsDto"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
+            "CreateQuestionsAsyncByRequest": {
+              "uniqueName": "CreateQuestionsAsyncByRequest",
+              "name": "CreateQuestionsAsync",
               "httpMethod": "POST",
-              "url": "api/setting-management/emailing",
+              "url": "api/app/question/questions",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto, Volo.Abp.SettingManagement.Application.Contracts",
-                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "name": "request",
+                  "typeAsString": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto, ThanhNien.Application.Contracts",
+                  "type": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
+                  "typeSimple": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "input",
-                  "name": "input",
+                  "nameOnMethod": "request",
+                  "name": "request",
                   "jsonName": null,
-                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "type": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
+                  "typeSimple": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -60,8 +56,241 @@
                 }
               ],
               "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              }
+            },
+            "GetAllUserResultsAsyncByRequest": {
+              "uniqueName": "GetAllUserResultsAsyncByRequest",
+              "name": "GetAllUserResultsAsync",
+              "httpMethod": "GET",
+              "url": "api/app/question/user-results",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "request",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "request",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "request"
+                },
+                {
+                  "nameOnMethod": "request",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "request"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<ThanhNien.Questions.Dtos.UserResultDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<ThanhNien.Questions.Dtos.UserResultDto>"
+              }
+            },
+            "GetQuestionsAsyncByPhone": {
+              "uniqueName": "GetQuestionsAsyncByPhone",
+              "name": "GetQuestionsAsync",
+              "httpMethod": "GET",
+              "url": "api/app/question/questions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "phone",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "phone",
+                  "name": "phone",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.QuestionDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.QuestionDto>"
+              }
+            },
+            "GetResultAsyncByPhone": {
+              "uniqueName": "GetResultAsyncByPhone",
+              "name": "GetResultAsync",
+              "httpMethod": "GET",
+              "url": "api/app/question/result",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "phone",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "phone",
+                  "name": "phone",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "ThanhNien.Questions.Dtos.UserResultDto",
+                "typeSimple": "ThanhNien.Questions.Dtos.UserResultDto"
+              }
+            },
+            "SubmitAnswersAsyncByRequest": {
+              "uniqueName": "SubmitAnswersAsyncByRequest",
+              "name": "SubmitAnswersAsync",
+              "httpMethod": "POST",
+              "url": "api/app/question/submit-answers",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "request",
+                  "typeAsString": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto, ThanhNien.Application.Contracts",
+                  "type": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
+                  "typeSimple": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "request",
+                  "name": "request",
+                  "jsonName": null,
+                  "type": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
+                  "typeSimple": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "ThanhNien.Questions.Dtos.UserResultDto",
+                "typeSimple": "ThanhNien.Questions.Dtos.UserResultDto"
+              }
+            },
+            "GetStartTimeAsyncByPhone": {
+              "uniqueName": "GetStartTimeAsyncByPhone",
+              "name": "GetStartTimeAsync",
+              "httpMethod": "GET",
+              "url": "api/app/question/start-time",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "phone",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "phone",
+                  "name": "phone",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.DateTime",
+                "typeSimple": "string"
+              }
+            },
+            "GetTopDepartment": {
+              "uniqueName": "GetTopDepartment",
+              "name": "GetTopDepartment",
+              "httpMethod": "GET",
+              "url": "api/app/question/top-department",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.TopDepartmentDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.TopDepartmentDto>"
+              }
+            }
+          }
+        },
+        "ThanhNien.Departments.DepartmentAppService": {
+          "controllerName": "Department",
+          "type": "ThanhNien.Departments.DepartmentAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "ThanhNien.Departments.IDepartmentAppService"
+            }
+          ],
+          "actions": {
+            "GetAllDepartmentAsync": {
+              "uniqueName": "GetAllDepartmentAsync",
+              "name": "GetAllDepartmentAsync",
+              "httpMethod": "GET",
+              "url": "api/app/department/department",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Departments.Dtos.DepartmentDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Departments.Dtos.DepartmentDto>"
               }
             }
           }
@@ -433,51 +662,55 @@
         }
       }
     },
-    "app": {
-      "rootPath": "app",
-      "remoteServiceName": "Default",
+    "settingManagement": {
+      "rootPath": "settingManagement",
+      "remoteServiceName": "SettingManagement",
       "controllers": {
-        "ThanhNien.Questions.QuestionAppService": {
-          "controllerName": "Question",
-          "type": "ThanhNien.Questions.QuestionAppService",
+        "Volo.Abp.SettingManagement.EmailSettingsController": {
+          "controllerName": "EmailSettings",
+          "type": "Volo.Abp.SettingManagement.EmailSettingsController",
           "interfaces": [
             {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "ThanhNien.Questions.IQuestionAppService"
+              "type": "Volo.Abp.SettingManagement.IEmailSettingsAppService"
             }
           ],
           "actions": {
-            "CreateQuestionsAsyncByRequest": {
-              "uniqueName": "CreateQuestionsAsyncByRequest",
-              "name": "CreateQuestionsAsync",
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/setting-management/emailing",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.SettingManagement.EmailSettingsDto",
+                "typeSimple": "Volo.Abp.SettingManagement.EmailSettingsDto"
+              }
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
               "httpMethod": "POST",
-              "url": "api/app/question/questions",
+              "url": "api/setting-management/emailing",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "request",
-                  "typeAsString": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto, ThanhNien.Application.Contracts",
-                  "type": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
-                  "typeSimple": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto, Volo.Abp.SettingManagement.Application.Contracts",
+                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "request",
-                  "name": "request",
+                  "nameOnMethod": "input",
+                  "name": "input",
                   "jsonName": null,
-                  "type": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
-                  "typeSimple": "ThanhNien.Questions.Dtos.CreateQuestionRequestDto",
+                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -486,241 +719,8 @@
                 }
               ],
               "returnValue": {
-                "type": "System.Boolean",
-                "typeSimple": "boolean"
-              }
-            },
-            "GetAllUserResultsAsyncByRequest": {
-              "uniqueName": "GetAllUserResultsAsyncByRequest",
-              "name": "GetAllUserResultsAsync",
-              "httpMethod": "GET",
-              "url": "api/app/question/user-results",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "request",
-                  "typeAsString": "Volo.Abp.Application.Dtos.PagedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
-                  "type": "Volo.Abp.Application.Dtos.PagedResultRequestDto",
-                  "typeSimple": "Volo.Abp.Application.Dtos.PagedResultRequestDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "request",
-                  "name": "MaxResultCount",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "request"
-                },
-                {
-                  "nameOnMethod": "request",
-                  "name": "SkipCount",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "request"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.PagedResultDto<ThanhNien.Questions.Dtos.UserResultDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<ThanhNien.Questions.Dtos.UserResultDto>"
-              }
-            },
-            "GetQuestionsAsyncByPhone": {
-              "uniqueName": "GetQuestionsAsyncByPhone",
-              "name": "GetQuestionsAsync",
-              "httpMethod": "GET",
-              "url": "api/app/question/questions",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "phone",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "phone",
-                  "name": "phone",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.QuestionDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.QuestionDto>"
-              }
-            },
-            "GetResultAsyncByPhone": {
-              "uniqueName": "GetResultAsyncByPhone",
-              "name": "GetResultAsync",
-              "httpMethod": "GET",
-              "url": "api/app/question/result",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "phone",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "phone",
-                  "name": "phone",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "ThanhNien.Questions.Dtos.UserResultDto",
-                "typeSimple": "ThanhNien.Questions.Dtos.UserResultDto"
-              }
-            },
-            "SubmitAnswersAsyncByRequest": {
-              "uniqueName": "SubmitAnswersAsyncByRequest",
-              "name": "SubmitAnswersAsync",
-              "httpMethod": "POST",
-              "url": "api/app/question/submit-answers",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "request",
-                  "typeAsString": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto, ThanhNien.Application.Contracts",
-                  "type": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
-                  "typeSimple": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "request",
-                  "name": "request",
-                  "jsonName": null,
-                  "type": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
-                  "typeSimple": "ThanhNien.Questions.Dtos.SubmitAnswersRequestDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "ThanhNien.Questions.Dtos.UserResultDto",
-                "typeSimple": "ThanhNien.Questions.Dtos.UserResultDto"
-              }
-            },
-            "GetStartTimeAsyncByPhone": {
-              "uniqueName": "GetStartTimeAsyncByPhone",
-              "name": "GetStartTimeAsync",
-              "httpMethod": "GET",
-              "url": "api/app/question/start-time",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "phone",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "phone",
-                  "name": "phone",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.DateTime",
-                "typeSimple": "string"
-              }
-            },
-            "GetTopDepartment": {
-              "uniqueName": "GetTopDepartment",
-              "name": "GetTopDepartment",
-              "httpMethod": "GET",
-              "url": "api/app/question/top-department",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.TopDepartmentDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Questions.Dtos.TopDepartmentDto>"
-              }
-            }
-          }
-        },
-        "ThanhNien.Departments.DepartmentAppService": {
-          "controllerName": "Department",
-          "type": "ThanhNien.Departments.DepartmentAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "ThanhNien.Departments.IDepartmentAppService"
-            }
-          ],
-          "actions": {
-            "GetAllDepartmentAsync": {
-              "uniqueName": "GetAllDepartmentAsync",
-              "name": "GetAllDepartmentAsync",
-              "httpMethod": "GET",
-              "url": "api/app/department/department",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Departments.Dtos.DepartmentDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<ThanhNien.Departments.Dtos.DepartmentDto>"
+                "type": "System.Void",
+                "typeSimple": "System.Void"
               }
             }
           }
@@ -4377,10 +4377,10 @@
           "isRequired": false
         },
         {
-          "name": "DepartmentId",
+          "name": "Department",
           "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
+          "type": "ThanhNien.Departments.Dtos.DepartmentDto",
+          "typeSimple": "ThanhNien.Departments.Dtos.DepartmentDto",
           "isRequired": false
         },
         {
@@ -4392,7 +4392,7 @@
         }
       ]
     },
-    "ThanhNien.Questions.Dtos.QuestionDto": {
+    "ThanhNien.Departments.Dtos.DepartmentDto": {
       "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
       "isEnum": false,
       "enumNames": null,
@@ -4400,17 +4400,10 @@
       "genericArguments": null,
       "properties": [
         {
-          "name": "Text",
+          "name": "Name",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Answers",
-          "jsonName": null,
-          "type": "[ThanhNien.Questions.Dtos.AnswerDto]",
-          "typeSimple": "[ThanhNien.Questions.Dtos.AnswerDto]",
           "isRequired": false
         }
       ]
@@ -4440,6 +4433,29 @@
       "enumValues": null,
       "genericArguments": null,
       "properties": []
+    },
+    "ThanhNien.Questions.Dtos.QuestionDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Text",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Answers",
+          "jsonName": null,
+          "type": "[ThanhNien.Questions.Dtos.AnswerDto]",
+          "typeSimple": "[ThanhNien.Questions.Dtos.AnswerDto]",
+          "isRequired": false
+        }
+      ]
     },
     "ThanhNien.Questions.Dtos.AnswerDto": {
       "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
@@ -4564,22 +4580,6 @@
           "jsonName": null,
           "type": "System.Int64",
           "typeSimple": "number",
-          "isRequired": false
-        }
-      ]
-    },
-    "ThanhNien.Departments.Dtos.DepartmentDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Name",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
           "isRequired": false
         }
       ]

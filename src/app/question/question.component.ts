@@ -17,6 +17,7 @@ export interface IStudent {
   phone: string;
   studentId: string;
   classroom: string;
+  departmentId: number;
 }
 @Component({
   selector: 'app-question',
@@ -76,7 +77,7 @@ export class QuestionComponent implements OnInit {
     this.loading = true;
     let request: SubmitAnswersRequestDto;
     request = {
-      ...this.studentValue,
+      ...this.studentValue, 
       phone: String(this.studentValue.phone),
       answers: finished.map(d => ({ questionId: d.id, answerId: d.answer })),
     };

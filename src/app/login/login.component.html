@@ -7,14 +7,12 @@
     <input formControlName="studentId" class="input" placeholder="Mã số sinh viên" />
     <input formControlName="classroom" class="input" placeholder="Lớp" />
 
-    <button
-      [class.spinner]="loading"
-      [disabled]="loading"
-      (click)="onSubmit()"
-      class="btn-submit"
-      mat-raised-button
-      color="primary"
-    >
+    <select formControlName="departmentId" class="input" > 
+      <option value="{{department.id}}" *ngFor="let department of departments">{{department.name}}</option> 
+    </select>
+
+    <button [class.spinner]="loading" [disabled]="loading" (click)="onSubmit()" class="btn-submit" mat-raised-button
+      color="primary">
       Bắt đầu
     </button>
   </form>
