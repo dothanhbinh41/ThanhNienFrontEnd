@@ -7,13 +7,24 @@
     <input formControlName="studentId" class="input" placeholder="Mã số sinh viên" />
     <input formControlName="classroom" class="input" placeholder="Lớp" />
 
-    <select formControlName="departmentId" class="input">
-      <option disabled selected hidden value="">Chọn Khoa</option>
-      <option value="{{department.id}}" *ngFor="let department of departments">{{department.name}}</option>
+    <select
+      formControlName="departmentId"
+      class="input select-box {{ studentForm.value.departmentId === '' ? 'font-bold' : '' }}"
+    >
+      <option disabled selected hidden value="">Chọn khoa</option>
+      <option value="{{ department.id }}" *ngFor="let department of departments">
+        {{ department.name }}
+      </option>
     </select>
 
-    <button [class.spinner]="loading" [disabled]="loading" (click)="onSubmit()" class="btn-submit" mat-raised-button
-      color="primary">
+    <button
+      [class.spinner]="loading"
+      [disabled]="loading"
+      (click)="onSubmit()"
+      class="btn-submit"
+      mat-raised-button
+      color="primary"
+    >
       Bắt đầu
     </button>
   </form>
