@@ -1,6 +1,3 @@
-// import * as Controllers from './controllers';
-// import * as Microsoft from './microsoft';
+import * as Departments from './departments';
 import * as Questions from './questions';
-export { 
-  // Controllers, Microsoft, 
-  Questions };
+export { Departments, Questions };

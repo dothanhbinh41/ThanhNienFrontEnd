@@ -1,4 +1,4 @@
-import type { CreateQuestionRequestDto, QuestionDto, SubmitAnswersRequestDto, UserResultDto } from './dtos/models';
+import type { CreateQuestionRequestDto, QuestionDto, SubmitAnswersRequestDto, TopDepartmentDto, UserResultDto } from './dtos/models';
 import { RestService } from '@abp/ng.core';
 import type { ListResultDto, PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -21,7 +21,7 @@ export class QuestionService {
     this.restService.request<any, PagedResultDto<UserResultDto>>({
       method: 'GET',
       url: '/api/app/question/user-results',
-      params: { skipCount: request.skipCount, maxResultCount: request.maxResultCount },
+      params: { maxResultCount: request.maxResultCount, skipCount: request.skipCount },
     },
     { apiName: this.apiName });
 
@@ -50,13 +50,20 @@ export class QuestionService {
     },
     { apiName: this.apiName });
 
+  getTopDepartment = () =>
+    this.restService.request<any, ListResultDto<TopDepartmentDto>>({
+      method: 'GET',
+      url: '/api/app/question/top-department',
+    },
+    { apiName: this.apiName });
+
   submitAnswers = (request: SubmitAnswersRequestDto) =>
     this.restService.request<any, UserResultDto>({
       method: 'POST',
       url: '/api/app/question/submit-answers',
       body: request,
     },
-    { apiName: this.apiName }); 
+    { apiName: this.apiName });
 
   constructor(private restService: RestService) {}
 }

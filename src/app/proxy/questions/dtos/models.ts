@@ -34,7 +34,15 @@ export interface SubmitAnswersRequestDto {
   studentId?: string;
   name?: string;
   phone?: string;
+  departmentId: number;
   answers: ResultDto[];
+}
+
+export interface TopDepartmentDto {
+  name?: string;
+  rank: number;
+  totalMark: number;
+  totalTime: number;
 }
 
 export interface UserResultDto {
@@ -43,6 +51,6 @@ export interface UserResultDto {
   name?: string;
   phone?: string;
   time: number;
+  departmentId: number;
   mark: number;
-  rank?: number;
 }
