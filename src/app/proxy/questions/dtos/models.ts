@@ -44,6 +44,7 @@ export interface TopDepartmentDto {
   rank: number;
   totalMark: number;
   totalTime: number;
+  student: number;
 }
 
 export interface UserResultDto {

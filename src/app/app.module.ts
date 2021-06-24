@@ -22,7 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { ResultsComponent } from './results/results.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { StartComponent } from './starts/start.component';
-
+import {MatTabsModule} from '@angular/material/tabs'
 @NgModule({
   imports: [
     BrowserModule,
@@ -42,6 +42,7 @@ import { StartComponent } from './starts/start.component';
     MatInputModule,
     MatCardModule,
     MatDialogModule,
+    MatTabsModule
   ],
   declarations: [AppComponent, QuestionComponent,StartComponent, LoginComponent, ResultsComponent, LeaderboardComponent],
   providers: [APP_ROUTE_PROVIDER,ListService],
