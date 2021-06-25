@@ -1,6 +1,8 @@
 import { ListResultDto, ListService, PagedResultRequestDto } from '@abp/ng.core';
 import { PagedResultDto } from '@abp/ng.core';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { QuestionService } from '@proxy/questions';
 import { TopDepartmentDto, UserResultDto } from '@proxy/questions/dtos';
 import { Observable } from 'rxjs';
@@ -11,24 +13,33 @@ import { Observable } from 'rxjs';
   styleUrls: ['./leaderboard.component.scss']
 })
 export class LeaderboardComponent implements OnInit {
-  result: PagedResultDto<UserResultDto> = {};
-  departmentResult: ListResultDto<TopDepartmentDto> = {};
-  constructor(public list: ListService, private questionService: QuestionService) { }
-
+  student: MatTableDataSource<UserResultDto>;
+  department: MatTableDataSource<TopDepartmentDto>;
+  constructor(private questionService: QuestionService) { }
+  departmentColumns: string[] = ['rank', 'name', 'totalMark', 'totalTime', 'student'];
+  studentColumns: string[] = ['rank', 'name', 'classroom', 'studentId', 'phone', 'mark', 'time', 'department']; 
+  total: number = 0;
+  
   ngOnInit() {
-    this.list.maxResultCount = 10;
-    const departmentStreamCreator = () => this.questionService.getAllUserResults({ maxResultCount: this.list.maxResultCount, skipCount: this.list.page * this.list.maxResultCount });
-    const departmentResultStreamCreator = () => this.questionService.getTopDepartment();
-    this.list.hookToQuery(departmentStreamCreator).subscribe((response: PagedResultDto<UserResultDto>) => {
-      this.result.totalCount = response.totalCount;
-      this.result.items = response.items.map((item, index) => {
-        item.rank = index + 1 + this.list.page * this.list.maxResultCount;
+    this.questionService.getTopDepartment().subscribe((response: ListResultDto<TopDepartmentDto>) => {
+      this.department = new MatTableDataSource(response.items);
+    });
+
+    this.loadStudent(0);
+  } 
+  
+  loadStudent(page) {
+    this.questionService.getAllUserResults({ maxResultCount: 10, skipCount: page * 10 }).subscribe((response: PagedResultDto<UserResultDto>) => {
+      this.total = response.totalCount;
+      var res = response.items.map((item, index) => {
+        item.rank = index + 1 + page * 10;
         return item;
       });
+      this.student = new MatTableDataSource(res);
     });
+  }
 
-    this.list.hookToQuery(departmentResultStreamCreator).subscribe((response: ListResultDto<TopDepartmentDto>) => {
-      this.departmentResult = response;
-    });
+  changePage($event: PageEvent) { 
+    this.loadStudent($event.pageIndex);
   }
 }
