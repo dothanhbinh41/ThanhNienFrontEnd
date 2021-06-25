@@ -23,6 +23,8 @@ import { ResultsComponent } from './results/results.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { StartComponent } from './starts/start.component';
 import {MatTabsModule} from '@angular/material/tabs'
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   imports: [
     BrowserModule,
@@ -42,7 +44,9 @@ import {MatTabsModule} from '@angular/material/tabs'
     MatInputModule,
     MatCardModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   declarations: [AppComponent, QuestionComponent,StartComponent, LoginComponent, ResultsComponent, LeaderboardComponent],
   providers: [APP_ROUTE_PROVIDER,ListService],

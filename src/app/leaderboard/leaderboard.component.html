@@ -1,29 +1,88 @@
-<div class="full-card"> 
+<div class="full-card">
     <mat-tab-group>
         <mat-tab label="Bảng xếp hạng cá nhân">
-            <ngx-datatable data-testid="department-table" [rows]="result.items" [count]="result.totalCount"
-                [list]="list" default>
-                <ngx-datatable-column [name]="'Thứ hạng'" prop="rank"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Họ Tên'" prop="name"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Số ĐT'" prop="phone"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Mã HV'" prop="studentId"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Lớp'" prop="classroom"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Khoa'" prop="department.name"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Điểm'" prop="mark"></ngx-datatable-column>
-                <ngx-datatable-column [name]="'Thời gian'" prop="time"></ngx-datatable-column>
-            </ngx-datatable>
+            <table mat-table [dataSource]="student">
+                <tr mat-header-row *matHeaderRowDef="studentColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: studentColumns;"></tr>
+                <ng-container matColumnDef="rank">
+                    <th mat-header-cell *matHeaderCellDef> Thứ hạng </th>
+                    <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Họ Tên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef> Số ĐT </th>
+                    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="studentId">
+                    <th mat-header-cell *matHeaderCellDef> Mã HV </th>
+                    <td mat-cell *matCellDef="let element"> {{element.studentId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="classroom">
+                    <th mat-header-cell *matHeaderCellDef> Lớp </th>
+                    <td mat-cell *matCellDef="let element"> {{element.classroom}} </td>
+                </ng-container>
+                <ng-container matColumnDef="department">
+                    <th mat-header-cell *matHeaderCellDef> Khoa </th>
+                    <td mat-cell *matCellDef="let element"> {{element.department.name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="mark">
+                    <th mat-header-cell *matHeaderCellDef> Điểm </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mark}} </td>
+                </ng-container>
+                <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef> Thời gian </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                </ng-container>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="8">Chưa có kết quả</td>
+                </tr>
+               
+            </table>
+            <mat-paginator [pageSize]="10"   [length]="total" (page)="changePage($event)" showFirstLastButtons>
+            </mat-paginator>
         </mat-tab>
         <mat-tab label="Bảng xếp hạng khoa">
-            <ngx-datatable  [rows]="departmentResult.items" [count]="departmentResult.items?.length"
-            [list]="list" default>
-            <ngx-datatable-column [name]="'Thứ hạng'" prop="rank"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'Khoa'" prop="name"></ngx-datatable-column> 
-            <ngx-datatable-column [name]="'Tổng Điểm'" prop="totalMark"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'Tổng Thời gian'" prop="totalTime"></ngx-datatable-column>
-            ><ngx-datatable-column [name]="'Sinh viên tham gia'" prop="student"></ngx-datatable-column>
-        </ngx-datatable>
+
+            <table mat-table [dataSource]="department">
+                <tr mat-header-row *matHeaderRowDef="departmentColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: departmentColumns;"></tr>
+                <ng-container matColumnDef="rank">
+                    <th mat-header-cell *matHeaderCellDef> Thứ hạng </th>
+                    <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Khoa </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalMark">
+                    <th mat-header-cell *matHeaderCellDef> Tổng Điểm </th>
+                    <td mat-cell *matCellDef="let element"> {{element.totalMark}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalTime">
+                    <th mat-header-cell *matHeaderCellDef> Tổng Thời gian </th>
+                    <td mat-cell *matCellDef="let element"> {{element.totalTime}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="student">
+                    <th mat-header-cell *matHeaderCellDef> Sinh viên tham gia </th>
+                    <td mat-cell *matCellDef="let element"> {{element.student}} </td>
+                </ng-container>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="5">Chưa có kết quả</td>
+                </tr>
+            </table>
         </mat-tab>
     </mat-tab-group>
-
-
 </div>
